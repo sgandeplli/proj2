@@ -33,11 +33,10 @@ resource "google_compute_instance" "centos_vm" {
   startup-script = <<-EOT
     #!/bin/bash
     exec > /var/log/startup-script.log 2>&1
-    yum update -y
-    yum install -y httpd
-    systemctl start httpd
-    systemctl enable httpd
-    systemctl daemon-reload
+    sudo dnf update -y
+    sudo dnf install httpd -y
+    sudo systemctl start httpd
+    sudo systemctl enable httpd
   EOT
 }
 
