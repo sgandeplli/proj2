@@ -37,6 +37,7 @@ resource "google_compute_instance" "centos_vm" {
     yum install -y httpd
     systemctl start httpd
     systemctl enable httpd
+    systemctl daemon-reload
   EOT
 }
 
