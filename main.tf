@@ -19,7 +19,7 @@ resource "google_compute_instance" "centos_vm" {
     access_config {
     }
   }
-  metadata = {
+/*  metadata = {
     startup-script = <<-EOT
       #!/bin/bash
       yum update -y        # Update the package manager
@@ -28,4 +28,17 @@ resource "google_compute_instance" "centos_vm" {
       systemctl enable httpd # Enable Apache to start on boot
     EOT
   }
+*/
+  metadata = {
+  startup-script = <<-EOT
+    #!/bin/bash
+    exec > /var/log/startup-script.log 2>&1
+    yum update -y
+    yum install -y httpd
+    systemctl start httpd
+    systemctl enable httpd
+  EOT
+}
+
+
 }
